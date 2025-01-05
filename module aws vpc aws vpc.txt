@@ -31,3 +31,352 @@ resource "aws_vpc" "main" {
     tags_all                             = {}
 }
 
+terraform show
+# docker_container.nginx:
+resource "docker_container" "nginx" {
+    attach                                      = false
+    bridge                                      = null
+    command                                     = [
+        "nginx",
+        "-g",
+        "daemon off;",
+    ]
+    container_read_refresh_timeout_milliseconds = 15000
+    cpu_set                                     = null
+    cpu_shares                                  = 0
+    domainname                                  = null
+    entrypoint                                  = [
+        "/docker-entrypoint.sh",
+    ]
+    env                                         = []
+    gateway                                     = "172.17.0.1"
+    hostname                                    = "c142804afaf9"
+    id                                          = "c142804afaf998dfc7f8047c06bedf1abc569abb23f9055be12144470fd177a5"
+    image                                       = "sha256:f876bfc1cc63d905bb9c8ebc5adc98375bb8e22920959719d1a96e8f594868fa"
+    init                                        = false
+    ip_address                                  = "172.17.0.3"
+    ip_prefix_length                            = 16
+    ipc_mode                                    = "private"
+    log_driver                                  = "json-file"
+    logs                                        = false
+    max_retry_count                             = 0
+    memory                                      = 0
+    memory_swap                                 = 0
+    must_run                                    = true
+    name                                        = "tutorial"
+    network_data                                = [
+        {
+            gateway                   = "172.17.0.1"
+            global_ipv6_address       = null
+            global_ipv6_prefix_length = 0
+            ip_address                = "172.17.0.3"
+            ip_prefix_length          = 16
+            ipv6_gateway              = null
+            network_name              = "bridge"
+        },
+    ]
+    network_mode                                = "default"
+    pid_mode                                    = null
+    privileged                                  = false
+    publish_all_ports                           = false
+    read_only                                   = false
+    remove_volumes                              = true
+    restart                                     = "no"
+    rm                                          = false
+    runtime                                     = "runc"
+    security_opts                               = []
+    shm_size                                    = 64
+    start                                       = true
+    stdin_open                                  = false
+    stop_signal                                 = "SIGQUIT"
+    stop_timeout                                = 0
+    tty                                         = false
+    user                                        = null
+    userns_mode                                 = null
+    wait                                        = false
+    wait_timeout                                = 60
+    working_dir                                 = null
+
+    ports {
+        external = 8080
+        internal = 80
+        ip       = "0.0.0.0"
+        protocol = "tcp"
+    }
+}
+
+# docker_image.nginx:
+resource "docker_image" "nginx" {
+    id           = "sha256:f876bfc1cc63d905bb9c8ebc5adc98375bb8e22920959719d1a96e8f594868fanginx:latest"
+    image_id     = "sha256:f876bfc1cc63d905bb9c8ebc5adc98375bb8e22920959719d1a96e8f594868fa"
+    keep_locally = false
+    latest       = "sha256:f876bfc1cc63d905bb9c8ebc5adc98375bb8e22920959719d1a96e8f594868fa"
+    name         = "nginx:latest"
+    repo_digest  = "nginx@sha256:42e917aaa1b5bb40dd0f6f7f4f857490ac7747d7ef73b391c774a41a8b994f15"
+}
+
+# docker_tag.tag_MB:
+resource "docker_tag" "tag_MB" {
+    id              = "nginx:latest.nginx:MB"
+    source_image    = "nginx:latest"
+    source_image_id = "sha256:f876bfc1cc63d905bb9c8ebc5adc98375bb8e22920959719d1a96e8f594868fa"
+    target_image    = "nginx:MB"
+}
+
+
+Outputs:
+
+address = "http://localhost:8080"
+
+
+3.
+
+
+docker_container.db
+docker_container.example-app
+docker_image.example_app
+docker_image.postgres
+docker_network.shared
+(venv) student@student-ubuntu:~/Pulpit/MB/iac-labs-infra/terraform/zad3$ terraform show
+# docker_container.db:
+resource "docker_container" "db" {
+    attach                                      = false
+    bridge                                      = null
+    command                                     = [
+        "postgres",
+    ]
+    container_read_refresh_timeout_milliseconds = 15000
+    cpu_set                                     = null
+    cpu_shares                                  = 0
+    dns                                         = []
+    dns_opts                                    = []
+    dns_search                                  = []
+    domainname                                  = null
+    entrypoint                                  = [
+        "docker-entrypoint.sh",
+    ]
+    env                                         = [
+        "POSTGRES_DB=app",
+        "POSTGRES_PASSWORD=app_pass",
+        "POSTGRES_USER=app_user",
+    ]
+    group_add                                   = []
+    hostname                                    = "03bced767771"
+    id                                          = "03bced76777124d217dff5a5264d5328ba8b1eb41c16d8f766c28d7ce04bf20b"
+    image                                       = "sha256:4bc6cc20ca7a7d56c3cefa8dd618dd6a5419827cef9a1133c49f3156b9436471"
+    init                                        = false
+    ipc_mode                                    = "private"
+    log_driver                                  = "json-file"
+    log_opts                                    = {}
+    logs                                        = false
+    max_retry_count                             = 0
+    memory                                      = 0
+    memory_swap                                 = 0
+    must_run                                    = true
+    name                                        = "db"
+    network_data                                = [
+        {
+            gateway                   = "172.17.0.1"
+            global_ipv6_address       = null
+            global_ipv6_prefix_length = 0
+            ip_address                = "172.17.0.3"
+            ip_prefix_length          = 16
+            ipv6_gateway              = null
+            mac_address               = "02:42:ac:11:00:03"
+            network_name              = "bridge"
+        },
+    ]
+    network_mode                                = "default"
+    pid_mode                                    = null
+    privileged                                  = false
+    publish_all_ports                           = false
+    read_only                                   = false
+    remove_volumes                              = true
+    restart                                     = "no"
+    rm                                          = false
+    runtime                                     = "runc"
+    security_opts                               = []
+    shm_size                                    = 64
+    start                                       = true
+    stdin_open                                  = false
+    stop_signal                                 = "SIGINT"
+    stop_timeout                                = 0
+    storage_opts                                = {}
+    sysctls                                     = {}
+    tmpfs                                       = {}
+    tty                                         = false
+    user                                        = null
+    userns_mode                                 = null
+    wait                                        = false
+    wait_timeout                                = 60
+    working_dir                                 = null
+}
+
+# docker_container.example-app:
+resource "docker_container" "example-app" {
+    attach                                      = false
+    bridge                                      = null
+    command                                     = []
+    container_read_refresh_timeout_milliseconds = 15000
+    cpu_set                                     = null
+    cpu_shares                                  = 0
+    domainname                                  = null
+    entrypoint                                  = [
+        "poetry",
+        "run",
+        "task",
+        "prod",
+    ]
+    env                                         = [
+        "DB_ENGINE=postgresql",
+        "DB_HOST=db",
+        "DB_NAME=app",
+        "DB_PASS=app_pass",
+        "DB_PORT=5432",
+        "DB_USERNAME=app_user",
+    ]
+    hostname                                    = "7f48dd792938"
+    id                                          = "7f48dd7929387d365f8c4e18943ee53f5d11ef635313a1ed011d8e54824e03d5"
+    image                                       = "sha256:76ffe1562459db04b42dca523bd4987f433663b8fc5bab98256a5374460ce16e"
+    init                                        = false
+    ipc_mode                                    = "private"
+    log_driver                                  = "json-file"
+    logs                                        = false
+    max_retry_count                             = 0
+    memory                                      = 0
+    memory_swap                                 = 0
+    must_run                                    = true
+    name                                        = "example-app"
+    network_data                                = [
+        {
+            gateway                   = "172.20.0.1"
+            global_ipv6_address       = null
+            global_ipv6_prefix_length = 0
+            ip_address                = "172.20.0.2"
+            ip_prefix_length          = 16
+            ipv6_gateway              = null
+            mac_address               = "02:42:ac:14:00:02"
+            network_name              = "tfnet"
+        },
+    ]
+    network_mode                                = "default"
+    pid_mode                                    = null
+    privileged                                  = false
+    publish_all_ports                           = false
+    read_only                                   = false
+    remove_volumes                              = true
+    restart                                     = "no"
+    rm                                          = false
+    runtime                                     = "runc"
+    security_opts                               = []
+    shm_size                                    = 64
+    start                                       = true
+    stdin_open                                  = false
+    stop_signal                                 = null
+    stop_timeout                                = 0
+    tty                                         = false
+    user                                        = null
+    userns_mode                                 = null
+    wait                                        = false
+    wait_timeout                                = 60
+    working_dir                                 = "/app"
+
+    networks_advanced {
+        aliases      = []
+        ipv4_address = null
+        ipv6_address = null
+        name         = "tfnet"
+    }
+
+    ports {
+        external = 8000
+        internal = 8000
+        ip       = "0.0.0.0"
+        protocol = "tcp"
+    }
+}
+
+# docker_image.example_app:
+resource "docker_image" "example_app" {
+    id          = "sha256:76ffe1562459db04b42dca523bd4987f433663b8fc5bab98256a5374460ce16eexample_app"
+    image_id    = "sha256:76ffe1562459db04b42dca523bd4987f433663b8fc5bab98256a5374460ce16e"
+    name        = "example_app"
+    repo_digest = null
+
+    build {
+        build_arg       = {
+            "platform" = "linux/amd64"
+        }
+        build_args      = {}
+        build_id        = null
+        cache_from      = []
+        cgroup_parent   = null
+        context         = "/home/student/Pulpit/MB/iac-labs-infra/terraform/zad3/../../iac-labs/example-app"
+        cpu_period      = 0
+        cpu_quota       = 0
+        cpu_set_cpus    = null
+        cpu_set_mems    = null
+        cpu_shares      = 0
+        dockerfile      = "Dockerfile"
+        extra_hosts     = []
+        force_remove    = false
+        isolation       = null
+        label           = {
+            "author" = "student"
+        }
+        labels          = {}
+        memory          = 0
+        memory_swap     = 0
+        network_mode    = null
+        no_cache        = false
+        platform        = null
+        pull_parent     = false
+        remote_context  = null
+        remove          = true
+        security_opt    = []
+        session_id      = null
+        shm_size        = 0
+        squash          = false
+        suppress_output = false
+        tag             = [
+            "example_app:latest",
+        ]
+        target          = null
+        version         = null
+    }
+}
+
+# docker_image.postgres:
+resource "docker_image" "postgres" {
+    id          = "sha256:4bc6cc20ca7a7d56c3cefa8dd618dd6a5419827cef9a1133c49f3156b9436471postgres:latest"
+    image_id    = "sha256:4bc6cc20ca7a7d56c3cefa8dd618dd6a5419827cef9a1133c49f3156b9436471"
+    name        = "postgres:latest"
+    repo_digest = "postgres@sha256:888402a8cd6075c5dc83a31f58287f13306c318eaad016661ed12e076f3e6341"
+}
+
+# docker_network.shared:
+resource "docker_network" "shared" {
+    attachable  = true
+    driver      = "bridge"
+    id          = "46564bd51cc3a03142082ebbc89d9926dbd89a158c4fe6a3607465ac4baa2369"
+    ingress     = false
+    internal    = false
+    ipam_driver = "default"
+    ipv6        = false
+    name        = "tfnet"
+    options     = {}
+    scope       = "local"
+
+    ipam_config {
+        aux_address = {}
+        gateway     = "172.20.0.1"
+        ip_range    = null
+        subnet      = "172.20.0.0/16"
+    }
+}
+
+
+Outputs:
+
+address = "http://localhost:8000"
+
