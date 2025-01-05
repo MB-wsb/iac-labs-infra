@@ -9,6 +9,11 @@ terraform {
 
 provider "aws" {
   region = "eu-central-1"
+  access_key = "testMB"
+  secret_key = "testMB"
+  endpoints {
+  s3 = "http://s3.localhost.localstack.cloud:4566"
+  }
 }
 
 resource "aws_vpc" "main" {

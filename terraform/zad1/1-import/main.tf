@@ -9,11 +9,13 @@ terraform {
 
 provider "aws" {
   region = "eu-central-1"
-
+  access_key = "testMB"
+  secret_key = "testMB"
+  endpoints {
+  s3 = "http://s3.localhost.localstack.cloud:4566"
+  }
 }
 
-resource "aws_instance" "web" {
-  // AMI ID moze byc rozne w roznych regionach
-  ami           = "ami-0669b163befffbdfc"
-  instance_type = "t2.micro"
+resource "aws_s3_bucket" "test-bucket" {
+  bucket           = "my-localhost-bucket"
 }

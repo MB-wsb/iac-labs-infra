@@ -1,0 +1,33 @@
+module.aws_vpc.aws_vpc.main
+module.aws_vpc_east.aws_vpc.main
+module.webserver.aws_instance.webserver
+module.webserver.aws_subnet.webserver
+module.webserver2.aws_instance.webserver
+module.webserver2.aws_subnet.webserver
+
+
+# module.aws_vpc.aws_vpc.main:
+resource "aws_vpc" "main" {
+    arn                                  = "arn:aws:ec2:eu-central-1:000000000000:vpc/vpc-37a40addee4e88420"
+    assign_generated_ipv6_cidr_block     = false
+    cidr_block                           = "10.0.0.0/16"
+    default_network_acl_id               = "acl-34848c07d5decf603"
+    default_route_table_id               = "rtb-4bbbff4d27e126fa3"
+    default_security_group_id            = "sg-d8bf74f5535fa0bcc"
+    dhcp_options_id                      = "default"
+    enable_dns_hostnames                 = false
+    enable_dns_support                   = true
+    enable_network_address_usage_metrics = false
+    id                                   = "vpc-37a40addee4e88420"
+    instance_tenancy                     = "default"
+    ipv6_association_id                  = null
+    ipv6_cidr_block                      = null
+    ipv6_cidr_block_network_border_group = null
+    ipv6_ipam_pool_id                    = null
+    ipv6_netmask_length                  = 0
+    main_route_table_id                  = "rtb-4bbbff4d27e126fa3"
+    owner_id                             = "000000000000"
+    tags                                 = {}
+    tags_all                             = {}
+}
+
